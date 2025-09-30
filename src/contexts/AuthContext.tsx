@@ -15,17 +15,19 @@ interface AuthContextType extends AuthState {
 type AuthAction =
   | { type: 'LOGIN_START' }
   | { type: 'LOGIN_SUCCESS'; payload: User }
-  | { type: 'LOGIN_FAILURE' }
+  | { type: 'LOGIN_FAILURE'; payload?: string }
   | { type: 'LOGOUT' }
   | { type: 'OPEN_AUTH_MODAL'; payload: 'login' | 'register' }
   | { type: 'CLOSE_AUTH_MODAL' }
   | { type: 'LOAD_USER'; payload: User };
 
-const initialState: AuthState & { authModalMode: 'login' | 'register' | null } = {
+const initialState: AuthState & { authModalMode: 'login' | 'register' | null; isAuthModalOpen: boolean } = {
   user: null,
   isAuthenticated: false,
   isLoading: false,
+  error: null,
   authModalMode: null,
+  isAuthModalOpen: false,
 };
 
 function authReducer(state: typeof initialState, action: AuthAction): typeof initialState {

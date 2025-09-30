@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { useAuth } from "@/contexts/AuthContext";
@@ -18,7 +18,7 @@ import {
   ShoppingBag,
 } from "lucide-react";
 
-export default function LoginPage() {
+function LoginPageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { login, isAuthenticated, isLoading } = useAuth();
@@ -75,13 +75,12 @@ export default function LoginPage() {
     <div className="bg-gray-50 min-h-screen">
       <Header />
       
-      {notification && (
-        <BannerNotification
-          type={notification.type}
-          message={notification.message}
-          onClose={hideNotification}
-        />
-      )}
+      <BannerNotification
+        type={notification.type}
+        message={notification.message}
+        isVisible={notification.isVisible}
+        onClose={hideNotification}
+      />
 
       <div className="max-w-md mx-auto px-4 py-16">
         <div className="bg-white rounded-lg shadow-sm p-8">
@@ -204,5 +203,13 @@ export default function LoginPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <LoginPageContent />
+    </Suspense>
   );
 }

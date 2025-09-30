@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
@@ -29,10 +29,11 @@ import {
   Plus,
   Trash2,
 } from "lucide-react";
+import { ShippingAddress } from "@/lib/types";
 
 type DashboardTab = "profile" | "orders" | "wishlist" | "settings";
 
-export default function AccountPage() {
+function AccountPageContent() {
   const { user, isAuthenticated, logout } = useAuth();
   const { getUserOrders } = useOrders();
   const { items: wishlistItems } = useWishlist();
@@ -1113,5 +1114,13 @@ export default function AccountPage() {
       <CartSidebar />
       <AuthModal />
     </div>
+  );
+}
+
+export default function AccountPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <AccountPageContent />
+    </Suspense>
   );
 }

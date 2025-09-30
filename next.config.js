@@ -1,9 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // output: 'export', // Commented out for development - enable for static export
-  // distDir: 'out', // Commented out for development
-  // trailingSlash: true, // Disabled to fix RSC navigation issues
-  allowedDevOrigins: ["*.preview.same-app.com"],
+  // Vercel deployment optimizations
+  experimental: {
+    optimizePackageImports: ['lucide-react']
+  },
+  // Enable static optimization for better performance
+  poweredByHeader: false,
+  compress: true,
+  allowedDevOrigins: ["*.preview.same-app.com", "*.vercel.app"],
   images: {
     unoptimized: true,
     domains: [

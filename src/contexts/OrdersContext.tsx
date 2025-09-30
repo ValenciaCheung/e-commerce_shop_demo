@@ -7,7 +7,7 @@ interface OrdersContextType {
   orders: Order[];
   currentOrder: Partial<Order> | null;
   isLoading: boolean;
-  createOrder: (items: CartItem[], shippingAddress: ShippingAddress, billingAddress: ShippingAddress, paymentMethod: PaymentMethod) => Promise<Order>;
+  createOrder: (items: CartItem[], shippingAddress: ShippingAddress, billingAddress: ShippingAddress, paymentMethod: PaymentMethod, userId?: string) => Promise<Order>;
   getOrderById: (orderId: string) => Order | undefined;
   getUserOrders: (userId: string) => Order[];
   updateOrderStatus: (orderId: string, status: Order['status']) => void;
