@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import Link from 'next/link';
 import Header from '@/components/Header';
 import Breadcrumb from '@/components/Breadcrumb';
 import CartSidebar from '@/components/CartSidebar';
@@ -78,12 +79,12 @@ export default function AboutUsPage() {
             Have questions or feedback? We'd love to hear from you. Our customer service team is here to help.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
-            <a 
+            <Link 
               href="/" 
               className="inline-block px-6 py-3 bg-gray-800 text-white font-semibold rounded-md hover:bg-gray-700 transition-colors text-center"
             >
               Shop Now
-            </a>
+            </Link>
           </div>
         </div>
       </main>
